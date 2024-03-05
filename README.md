@@ -1,0 +1,1 @@
+# jajrt_mobile_shop
