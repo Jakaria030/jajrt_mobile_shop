@@ -33,21 +33,20 @@
     <div class="container px-lg-4 mt-4"> 
         <div class="swiper swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img src="images/carousel/1.jpg" class="w-100 d-block"/>
-                </div>
-                <div class="swiper-slide">
-                    <img src="images/carousel/2.jpg" class="w-100 d-block"/>
-                </div>
-                <div class="swiper-slide">
-                    <img src="images/carousel/3.jpg" class="w-100 d-block"/>
-                </div>
-                <div class="swiper-slide">
-                    <img src="images/carousel/4.jpg" class="w-100 d-block"/>
-                </div>
-                <div class="swiper-slide">
-                    <img src="images/carousel/5.jpg" class="w-100 d-block"/>
-                </div>
+
+            <?php
+                $res = selectAll("carousel");
+                $path = CAROUSEL_IMG_PATH;
+                
+                while($row = $res->fetch_assoc()){
+                    echo<<<data
+                    <div class="swiper-slide">
+                        <img src="$path$row[image]" class="w-100 d-block"/>
+                    </div>
+                    data;
+                }
+            ?>
+
             </div>
         </div>
     </div>  
@@ -135,7 +134,76 @@
             </div>
 
             <div class="col-lg-3 col-md-6 my-3"> 
-                <video src="video/1.mp4" class="mt-0" width="300" height="240" controls></video>
+                <iframe width="300" height="auto" src="https://shorturl.at/uzJNV" title="YouTube video player" allowfullscreen></iframe>
+                
+                <form action="">
+                    <div class="input-group mb-4 mt-3">
+                        <input type="text" name="comment" class="form-control shadow-none" placeholder="Write your comment">
+                        <button class="btn btn-primary shadow-none" type="submit">SEND</button>
+                    </div>
+                </form>
+                
+                <div clas="p-2" style="height: 350px; overflow-y: scroll;"> 
+                <figure>
+                    <blockquote class="blockquote">
+                    <div class="d-flex align-items-center mb-3"> 
+                        <img src="images/users/tmp.jpg" loading="lazy" class="rounded-circle" width="30px">
+                        <h6 class="m-0 ms-2">Jakaria</h6>
+                    </div>
+                    </blockquote>
+                    <figcaption class="blockquote-footer">
+                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, vel.</span>
+                    </figcaption>
+                </figure>
+
+                <figure>
+                    <blockquote class="blockquote">
+                    <div class="d-flex align-items-center mb-3"> 
+                        <img src="images/users/tmp.jpg" loading="lazy" class="rounded-circle" width="30px">
+                        <h6 class="m-0 ms-2">Jakaria</h6>
+                    </div>
+                    </blockquote>
+                    <figcaption class="blockquote-footer">
+                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, vel.</span>
+                    </figcaption>
+                </figure>
+
+                <figure>
+                    <blockquote class="blockquote">
+                    <div class="d-flex align-items-center mb-3"> 
+                        <img src="images/users/tmp.jpg" loading="lazy" class="rounded-circle" width="30px">
+                        <h6 class="m-0 ms-2">Jakaria</h6>
+                    </div>
+                    </blockquote>
+                    <figcaption class="blockquote-footer">
+                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, vel.</span>
+                    </figcaption>
+                </figure>
+
+                <figure>
+                    <blockquote class="blockquote">
+                    <div class="d-flex align-items-center mb-3"> 
+                        <img src="images/users/tmp.jpg" loading="lazy" class="rounded-circle" width="30px">
+                        <h6 class="m-0 ms-2">Jakaria</h6>
+                    </div>
+                    </blockquote>
+                    <figcaption class="blockquote-footer">
+                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, vel.</span>
+                    </figcaption>
+                </figure>
+                <figure>
+                    <blockquote class="blockquote">
+                    <div class="d-flex align-items-center mb-3"> 
+                        <img src="images/users/tmp.jpg" loading="lazy" class="rounded-circle" width="30px">
+                        <h6 class="m-0 ms-2">Jakaria</h6>
+                    </div>
+                    </blockquote>
+                    <figcaption class="blockquote-footer">
+                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, vel.</span>
+                    </figcaption>
+                </figure>
+                </div>
+
             </div>
         </div>
 
@@ -242,33 +310,49 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-8 p-4 mb-lg-0 mb-3 bg-white rounded">
-                <iframe class="w-100 rounded" height="320px" src="https://shorturl.at/lyzH8"  loading="lazy"></iframe>
+                <iframe class="w-100 rounded" height="320px" src="<?php echo $contact_r['iframe']; ?>"  loading="lazy"></iframe>
             </div>
             <div class="col-lg-4 col-md-4"> 
                 <div class="bg-white p-4 rounded mb-4"> 
                     <h5>Call us</h5>
-                    <a href="tel: +8801725490784" class="d-inline-block mb-2 text-decoration-none text-dark">
-                        <i class="bi bi-telephone-fill"></i>+8801725490784
+                    <a href="tel: +88<?php echo $contact_r['phn1']; ?>" class="d-inline-block mb-2 text-decoration-none text-dark">
+                        <i class="bi bi-telephone-fill"></i>+880<?php echo $contact_r['phn1']; ?>
                     </a><br>
 
-                    <a href="tel: +8801726267799" class="d-inline-block text-decoration-none text-dark">
-                        <i class="bi bi-telephone-fill"></i>+8801726267799
-                    </a>
+                    <?php 
+                        if($contact_r['phn2'] != 0){
+                            echo<<<data
+                            <a href="tel: +880$contact_r[phn2]" class="d-inline-block text-decoration-none text-dark">
+                                <i class="bi bi-telephone-fill"></i> +880$contact_r[phn2]
+                            </a>
+                            data;
+                        }
+                    ?>
+                    
                 </div>
 
                 <div class="bg-white p-4 rounded mb-4"> 
                     <h5>Follow us</h5>
-                    <a href="#" class="d-inline-block mb-2">
+                    <a href="<?php echo $contact_r['fb']; ?>" class="d-inline-block mb-2">
                         <span class="badge bg-light text-dark fs-6 p-2"><i class="bi bi-facebook me-1"></i>Facebook</span>
                     </a><br>
+                    <?php 
+                        if($contact_r["insta"] != ""){
+                            echo<<<data
+                            <a href="$contact_r[insta]" class="d-inline-block mb-2">
+                                <span class="badge bg-light text-dark fs-6 p-2"><i class="bi bi-instagram me-1"></i>Instagram</span>
+                            </a><br>
+                            data;
+                        }
+                        if($contact_r["tw"] != ""){
+                            echo<<<data
+                            <a href="$contact_r[tw]" class="d-inline-block mb-2">
+                                <span class="badge bg-light text-dark fs-6 p-2"><i class="bi bi-twitter me-1"></i>Twitter</span>
+                            </a>
+                            data;
+                        }
 
-                    <a href="#" class="d-inline-block mb-2">
-                        <span class="badge bg-light text-dark fs-6 p-2"><i class="bi bi-instagram me-1"></i>Instagram</span>
-                    </a><br>
-
-                    <a href="#" class="d-inline-block mb-2">
-                        <span class="badge bg-light text-dark fs-6 p-2"><i class="bi bi-twitter me-1"></i>Twitter</span>
-                    </a><br>
+                    ?>
     
                 </div>
             </div>

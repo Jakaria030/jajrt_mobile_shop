@@ -3,8 +3,8 @@
 <div class="container-fluid bg-white mt-5"> 
     <div class="row">
         <div class="col-lg-4 p-4"> 
-            <h3 class="fw-bold fs-3 mb-2">JAJRT Mobile Shop</h3>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt cumque ea quo. Obcaecati quaerat blanditiis sit aut rerum libero officia labore ad fuga! Nostrum cum earum enim sit, corporis quaerat harum! Temporibus eaque libero perspiciatis pariatur, minima ducimus dolorem! Error omnis asperiores et veniam vel.</p>
+            <h3 class="fw-bold fs-3 mb-2"><?php echo $settings_r["site_title"]; ?></h3>
+            <p><?php echo $settings_r["site_about"]; ?></p>
         </div>
 
         <div class="col-lg-4 p-3"> 
@@ -17,9 +17,20 @@
 
         <div class="col-lg-4 p-4"> 
             <h5 class="mb-3">Follow us</h5>
-            <a href="#" class="d-inline-block text-dark text-decoration-none mb-2"><i class="bi bi-facebook me-1"></i>Facebook</a><br>
-            <a href="#" class="d-inline-block text-dark text-decoration-none mb-2"><i class="bi bi-instagram me-1"></i>Instagram</a><br>
-            <a href="#" class="d-inline-block text-dark text-decoration-none"><i class="bi bi-twitter me-1"></i>Twitter</a>
+            <a href="<?php echo $contact_r['fb']; ?>" class="d-inline-block text-dark text-decoration-none mb-2"><i class="bi bi-facebook me-1"></i>Facebook</a><br>
+            
+            <?php 
+                if($contact_r["insta"] != ""){
+                    echo<<<data
+                    <a href="$contact_r[insta]" class="d-inline-block text-dark text-decoration-none mb-2"><i class="bi bi-instagram me-1"></i>Instagram</a><br>
+                    data;
+                }
+                if($contact_r["tw"] != ""){
+                    echo<<<data
+                    <a href="$contact_r[tw]" class="d-inline-block text-dark text-decoration-none"><i class="bi bi-twitter me-1"></i>Twitter</a>
+                    data;
+                }
+            ?>
         </div>
     </div>
 </div>

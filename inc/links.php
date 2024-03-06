@@ -3,6 +3,14 @@
     require("admin/inc/essentials.php");
     session_start();
     date_default_timezone_set("Asia/Dhaka");
+
+    //Settins
+    $settings_q = crud("select", "SELECT * FROM `settings` WHERE `sr_no`=?", [1], "i");
+    $settings_r = $settings_q->fetch_assoc();
+
+    //Contact details
+    $contact_q = crud("select", "SELECT * FROM `contact_details` WHERE `sr_no`=?", [1], "i");
+    $contact_r = $contact_q->fetch_assoc();
     
 ?>
 <!-- Bootstrap v5.0 -->

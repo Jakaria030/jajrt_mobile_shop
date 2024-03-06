@@ -20,3 +20,10 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{
 .dropdown-toggle::after{
     display: none;
 }
+
+.custom-alert{
+    position: fixed;
+    top: 80px;
+    right: 25px;
+    z-index: 999999;
+}
