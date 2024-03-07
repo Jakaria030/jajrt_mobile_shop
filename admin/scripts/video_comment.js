@@ -5,7 +5,8 @@ video_s_form.addEventListener("submit", function(e){
     e.preventDefault();
 
     let data = new FormData();
-    data.append("video", video_s_form.elements["video"].value);
+    data.append("_title", video_s_form.elements["_title"].value);
+    data.append("link", video_s_form.elements["link"].value);
     data.append("add_video", "");
 
     let xhr = new XMLHttpRequest();
@@ -20,7 +21,8 @@ video_s_form.addEventListener("submit", function(e){
             customAlert("error", "Video does not upload. Server Down!");
         }else{
             customAlert("success", "New video added!");
-            video_s_form.elements["video"].value = "";
+            video_s_form.elements["_title"].value = "";
+            video_s_form.elements["link"].value = "";
             get_video();
         }
     }
@@ -81,7 +83,6 @@ function remove_video(id){
         xhr.send(data);
     }
 }
-
 
 //Load window
 window.onload = function(){

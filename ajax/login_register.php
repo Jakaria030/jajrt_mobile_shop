@@ -194,4 +194,43 @@
             echo 0;
         }
     }
+
+    //For insert comment
+    if(isset($_POST["comment"])){
+        $f_data = filteration($_POST);
+        $query = crud("insert", "INSERT INTO `comments`(`v_id`, `u_id`, `comment`) VALUES (?, ?, ?)", [$f_data["v_id"], $f_data["u_id"], $f_data["comment"]], "iis");
+        
+        if($query){
+            echo 1;
+        }
+    }
+
+    if(isset($_POST["get_comment"])){
+        $sql = "SELECT u.name, u.profile, c.comment 
+                FROM comments AS c
+                JOIN user_cred AS u ON c.u_id = u.id
+                JOIN videos AS v ON c.v_id = v.v_id
+                WHERE v.status = ?
+                ORDER BY sr_no DESC";
+
+        $res = crud("select", $sql, [1], "i");
+        $path = USERS_IMG_PATH;
+
+        $data = "";
+        while($row = $res->fetch_assoc()){
+            $data .= "<figure>
+                <blockquote class='blockquote'>
+                <div class='d-flex align-items-center mb-3 mt-2'> 
+                    <img src='$path$row[profile]' loading='lazy' class='rounded-circle' width='30px'>
+                    <h6 class='m-0 ms-2'>$row[name]</h6>
+                </div>
+                </blockquote>
+                <figcaption class='blockquote-footer'>
+                    <span>$row[comment]</span>
+                </figcaption>
+            </figure>";
+        }
+
+        echo $data;
+    }
 ?>

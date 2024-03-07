@@ -6,7 +6,7 @@
     //Add video link
     if(isset($_POST["add_video"])){
 
-        if(crud("insert", "INSERT INTO `videos`(`link`) VALUES (?)", [$_POST["video"]], "s")){
+        if(crud("insert", "INSERT INTO `videos`(`title`, `link`) VALUES (?, ?)", [$_POST["_title"], $_POST["link"]], "ss")){
             echo 1;
         }else{
             echo "ins_failed";
@@ -29,6 +29,7 @@
             $data .= "
                 <tr class='align-middle'>
                     <td>$i</td>
+                    <td>$row[title]</td>
                     <td>$row[link]</td>
                     <td>$date</td>
                     <td>$status</td>
@@ -66,4 +67,5 @@
             echo 0;
         }
     }
+
 ?>

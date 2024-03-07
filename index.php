@@ -133,77 +133,34 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6 my-3"> 
-                <iframe width="300" height="auto" src="https://shorturl.at/uzJNV" title="YouTube video player" allowfullscreen></iframe>
-                
-                <form action="">
+            <div class="col-lg-3 col-md-6 my-3">
+                <?php 
+                    $v_res = crud("select", "SELECT `v_id`, `link` FROM `videos` WHERE `status`=? LIMIT 1", [1], "i");
+                    $row = $v_res->fetch_assoc();
+
+                    if($v_res->num_rows> 0){
+                        echo<<<iframe
+                        <iframe width="300" height="auto" src="$row[link]" title="YouTube video player" allowfullscreen></iframe>
+                        iframe;
+                    }
+                ?>
+                <form id="comment-form">
+                <?php
+                    if(isset($_SESSION["login"]) && $_SESSION["login"] == true){
+                    echo<<<data
                     <div class="input-group mb-4 mt-3">
+                        <input type="hidden" name="v_id" value="$row[v_id]">
+                        <input type="hidden" name="u_id" value="$_SESSION[uId]">
                         <input type="text" name="comment" class="form-control shadow-none" placeholder="Write your comment">
                         <button class="btn btn-primary shadow-none" type="submit">SEND</button>
                     </div>
+                    data;
+                    }
+                ?>
                 </form>
-                
-                <div clas="p-2" style="height: 350px; overflow-y: scroll;"> 
-                <figure>
-                    <blockquote class="blockquote">
-                    <div class="d-flex align-items-center mb-3"> 
-                        <img src="images/users/tmp.jpg" loading="lazy" class="rounded-circle" width="30px">
-                        <h6 class="m-0 ms-2">Jakaria</h6>
-                    </div>
-                    </blockquote>
-                    <figcaption class="blockquote-footer">
-                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, vel.</span>
-                    </figcaption>
-                </figure>
-
-                <figure>
-                    <blockquote class="blockquote">
-                    <div class="d-flex align-items-center mb-3"> 
-                        <img src="images/users/tmp.jpg" loading="lazy" class="rounded-circle" width="30px">
-                        <h6 class="m-0 ms-2">Jakaria</h6>
-                    </div>
-                    </blockquote>
-                    <figcaption class="blockquote-footer">
-                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, vel.</span>
-                    </figcaption>
-                </figure>
-
-                <figure>
-                    <blockquote class="blockquote">
-                    <div class="d-flex align-items-center mb-3"> 
-                        <img src="images/users/tmp.jpg" loading="lazy" class="rounded-circle" width="30px">
-                        <h6 class="m-0 ms-2">Jakaria</h6>
-                    </div>
-                    </blockquote>
-                    <figcaption class="blockquote-footer">
-                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, vel.</span>
-                    </figcaption>
-                </figure>
-
-                <figure>
-                    <blockquote class="blockquote">
-                    <div class="d-flex align-items-center mb-3"> 
-                        <img src="images/users/tmp.jpg" loading="lazy" class="rounded-circle" width="30px">
-                        <h6 class="m-0 ms-2">Jakaria</h6>
-                    </div>
-                    </blockquote>
-                    <figcaption class="blockquote-footer">
-                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, vel.</span>
-                    </figcaption>
-                </figure>
-                <figure>
-                    <blockquote class="blockquote">
-                    <div class="d-flex align-items-center mb-3"> 
-                        <img src="images/users/tmp.jpg" loading="lazy" class="rounded-circle" width="30px">
-                        <h6 class="m-0 ms-2">Jakaria</h6>
-                    </div>
-                    </blockquote>
-                    <figcaption class="blockquote-footer">
-                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, vel.</span>
-                    </figcaption>
-                </figure>
-                </div>
-
+                <div id="comment-data" class="p-2" style="height: 350px; overflow-y: scroll;">
+                    <!-- comment here -->
+                </div>                                
             </div>
         </div>
 
