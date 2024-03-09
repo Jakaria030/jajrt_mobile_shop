@@ -57,81 +57,41 @@
     <h2 class="mt-5 pt-4 mb-4 text-center font-weight-bold h-font">MOBILE</h2>   
     <div class="container">
         <div class="row">
+            
+            <?php
+                $sql = "SELECT `p_id`, `mobile_name`, `b_price`, `b_profile` FROM `products` ORDER BY `p_id` DESC LIMIT 3";
+                $product_q = $con->query($sql);
+                $path = MOBILE_IMG_PATH;
 
-            <div class="col-lg-3 col-md-6 my-3"> 
-                <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-                    <img src="images/mobile/1.jpg" class="card-img-top">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">iPhone</h5>
-                        <div class="rating mb-3"> 
-                            <span class="badge rounded-pill bg-light">
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                            </span>
-                        </div>
-                        
-                        <h6 class="mb-4">$1000</h6> 
-
-                        <div class="d-flex justify-content-evenly mb-2"> 
-                            <a href="#" class="btn btn-sm btn-primary shadow-none">Add To Cart <i class="bi bi-cart-check"></i></a>
-                            <a href="#" class="btn btn-sm btn-primary shadow-none">Description</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 my-3"> 
-                <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-                    <img src="images/mobile/1.jpg" class="card-img-top">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">iPhone</h5>
-                        <div class="rating mb-3"> 
-                            <span class="badge rounded-pill bg-light">
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                            </span>
-                        </div>
-                        
-                        <h6 class="mb-4">$1000</h6> 
-
-                        <div class="d-flex justify-content-evenly mb-2"> 
-                            <a href="#" class="btn btn-sm btn-primary shadow-none">Add To Cart <i class="bi bi-cart-check"></i></a>
-                            <a href="#" class="btn btn-sm btn-primary shadow-none">Description</a>
+                while($product_r = $product_q->fetch_assoc()){
+                    echo<<<data
+                    <div class="col-lg-3 col-md-6 my-3"> 
+                        <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
+                            <img src="$path$product_r[b_profile]" class="card-img-top">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">$product_r[mobile_name]</h5>
+                                <div class="rating mb-3"> 
+                                    <span class="badge rounded-pill bg-light">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                    </span>
+                                </div>
+                                
+                                <h6 class="mb-4">৳$product_r[b_price]</h6> 
+        
+                                <div class="d-flex justify-content-evenly mb-2"> 
+                                    <a href="#" class="btn btn-sm btn-primary shadow-none">Add To Cart <i class="bi bi-cart-check"></i></a>
+                                    <a href="description.php?description&p_id=$product_r[p_id]" class="btn btn-sm btn-primary shadow-none">Description</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 my-3"> 
-                <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-                    <img src="images/mobile/1.jpg" class="card-img-top">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">iPhone</h5>
-                        <div class="rating mb-3"> 
-                            <span class="badge rounded-pill bg-light">
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                            </span>
-                        </div>
-                        
-                        <h6 class="mb-4">$1000</h6> 
-
-                        <div class="d-flex justify-content-evenly mb-2"> 
-                            <a href="#" class="btn btn-sm btn-primary shadow-none">Add To Cart <i class="bi bi-cart-check"></i></a>
-                            <a href="#" class="btn btn-sm btn-primary shadow-none">Description</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    data;
+                }
+            ?>
 
             <div class="col-lg-3 col-md-6 my-3">
                 <?php 
@@ -471,6 +431,49 @@
             xhr.send(data);
         });
 
+        //For comment section
+    let comment_form = document.getElementById("comment-form");
+    comment_form.addEventListener("submit", (e) =>{
+        e.preventDefault();
+
+        let data = new FormData();
+
+        data.append("v_id", comment_form.elements["v_id"].value);
+        data.append("u_id", comment_form.elements["u_id"].value);
+        data.append("comment", comment_form.elements["comment"].value);
+        data.append("add_comment", "");
+
+        
+        //For Ajax
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "ajax/login_register.php", true);
+        
+        xhr.onload = function(){
+            comment_form.reset();
+            get_comment();
+        }
+        xhr.send(data);
+    });
+
+    //For get comment
+    function get_comment(){
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "ajax/login_register.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        
+        xhr.onload = function(){
+            document.getElementById("comment-data").innerHTML = this.responseText;     
+        }
+
+        xhr.send("get_comment");
+    }
+
+    
+    //For load windo and call get_user function
+    window.onload = function(){
+        get_comment();
+    }
+    
     </script>
 
 

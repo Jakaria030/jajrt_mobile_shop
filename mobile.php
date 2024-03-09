@@ -52,24 +52,20 @@
                                     <span>CATEGORY</span>
                                     <button class="btn btn-sm btn-outline-secondary shadow-none">Reset</button>
                                 </h5>
-                                <div class="mb-2"> 
-                                    <input type="checkbox"  value="1" id="1" class="form-check-input shadow-none me-1">
-                                    <label class="form-check-label" for="1">iPhone</label>
-                                </div>
-                                <div class="mb-2"> 
-                                    <input type="checkbox" value="1" id="1" class="form-check-input shadow-none me-1">
-                                    <label class="form-check-label" for="1">Samsung</label>
-                                </div>
-                                <div class="mb-2"> 
-                                    <input type="checkbox" value="1" id="1" class="form-check-input shadow-none me-1">
-                                    <label class="form-check-label" for="1">Nokia</label>
-                                </div>
-                                <div class="mb-2"> 
-                                    <input type="checkbox" value="1" id="1" class="form-check-input shadow-none me-1">
-                                    <label class="form-check-label" for="1">Realme</label>
-                                </div>
-                            </div>
 
+                            <?php 
+                                $sql = "SELECT * FROM `categories` GROUP BY `category`";
+                                $category_res = $con->query($sql);
+                                
+                                while($row = $category_res->fetch_assoc()){
+                                    echo<<<data
+                                    <div class="mb-2"> 
+                                        <input type="checkbox"  value="$row[category]" id="$row[c_id]" class="form-check-input shadow-none me-1">
+                                        <label class="form-check-label" for="$row[c_id]">$row[category]</label>
+                                    </div>
+                                    data;
+                                }
+                            ?>
                         </div>
                     </div>
                 </nav>
@@ -79,305 +75,39 @@
                 <div class="container m-0">
                     <div class="row">
 
-                        <div class="col-lg-3 col-md-6 my-3"> 
-                            <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-                                <img src="images/mobile/1.jpg" class="card-img-top">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">iPhone</h5>
-                                    <div class="rating mb-3"> 
-                                        <span class="badge rounded-pill bg-light">
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                        </span>
-                                    </div>
-                                    
-                                    <h6 class="mb-4">$1000</h6> 
+                    <?php
+                        $product_res = selectAll("products");
+                        $path = MOBILE_IMG_PATH;
 
-                                    <div class="d-flex justify-content-evenly mb-2"> 
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Add To Cart <i class="bi bi-cart-check"></i></a>
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Description</a>
+                        while($row = $product_res->fetch_assoc()){
+                            echo<<<data
+                            <div class="col-lg-3 col-md-6 my-3"> 
+                                <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
+                                    <img src="$path$row[b_profile]" class="card-img-top">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">$row[mobile_name]</h5>
+                                        <div class="rating mb-3"> 
+                                            <span class="badge rounded-pill bg-light">
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                            </span>
+                                        </div>
+                                        
+                                        <h6 class="mb-4">৳$row[b_price]</h6> 
+
+                                        <div class="d-flex justify-content-evenly mb-2"> 
+                                            <a href="#" class="btn btn-sm btn-primary shadow-none">Add To Cart <i class="bi bi-cart-check"></i></a>
+                                            <a href="description.php?description&p_id=$row[p_id]" class="btn btn-sm btn-primary shadow-none">Description</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 my-3"> 
-                            <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-                                <img src="images/mobile/1.jpg" class="card-img-top">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">iPhone</h5>
-                                    <div class="rating mb-3"> 
-                                        <span class="badge rounded-pill bg-light">
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                        </span>
-                                    </div>
-                                    
-                                    <h6 class="mb-4">$1000</h6> 
-
-                                    <div class="d-flex justify-content-evenly mb-2"> 
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Add To Cart <i class="bi bi-cart-check"></i></a>
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Description</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 my-3"> 
-                            <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-                                <img src="images/mobile/1.jpg" class="card-img-top">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">iPhone</h5>
-                                    <div class="rating mb-3"> 
-                                        <span class="badge rounded-pill bg-light">
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                        </span>
-                                    </div>
-                                    
-                                    <h6 class="mb-4">$1000</h6> 
-
-                                    <div class="d-flex justify-content-evenly mb-2"> 
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Add To Cart <i class="bi bi-cart-check"></i></a>
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Description</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 my-3"> 
-                            <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-                                <img src="images/mobile/1.jpg" class="card-img-top">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">iPhone</h5>
-                                    <div class="rating mb-3"> 
-                                        <span class="badge rounded-pill bg-light">
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                        </span>
-                                    </div>
-                                    
-                                    <h6 class="mb-4">$1000</h6> 
-
-                                    <div class="d-flex justify-content-evenly mb-2"> 
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Add To Cart <i class="bi bi-cart-check"></i></a>
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Description</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 my-3"> 
-                            <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-                                <img src="images/mobile/1.jpg" class="card-img-top">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">iPhone</h5>
-                                    <div class="rating mb-3"> 
-                                        <span class="badge rounded-pill bg-light">
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                        </span>
-                                    </div>
-                                    
-                                    <h6 class="mb-4">$1000</h6> 
-
-                                    <div class="d-flex justify-content-evenly mb-2"> 
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Add To Cart <i class="bi bi-cart-check"></i></a>
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Description</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 my-3"> 
-                            <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-                                <img src="images/mobile/1.jpg" class="card-img-top">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">iPhone</h5>
-                                    <div class="rating mb-3"> 
-                                        <span class="badge rounded-pill bg-light">
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                        </span>
-                                    </div>
-                                    
-                                    <h6 class="mb-4">$1000</h6> 
-
-                                    <div class="d-flex justify-content-evenly mb-2"> 
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Add To Cart <i class="bi bi-cart-check"></i></a>
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Description</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 my-3"> 
-                            <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-                                <img src="images/mobile/1.jpg" class="card-img-top">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">iPhone</h5>
-                                    <div class="rating mb-3"> 
-                                        <span class="badge rounded-pill bg-light">
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                        </span>
-                                    </div>
-                                    
-                                    <h6 class="mb-4">$1000</h6> 
-
-                                    <div class="d-flex justify-content-evenly mb-2"> 
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Add To Cart <i class="bi bi-cart-check"></i></a>
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Description</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 my-3"> 
-                            <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-                                <img src="images/mobile/1.jpg" class="card-img-top">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">iPhone</h5>
-                                    <div class="rating mb-3"> 
-                                        <span class="badge rounded-pill bg-light">
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                        </span>
-                                    </div>
-                                    
-                                    <h6 class="mb-4">$1000</h6> 
-
-                                    <div class="d-flex justify-content-evenly mb-2"> 
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Add To Cart <i class="bi bi-cart-check"></i></a>
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Description</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 my-3"> 
-                            <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-                                <img src="images/mobile/1.jpg" class="card-img-top">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">iPhone</h5>
-                                    <div class="rating mb-3"> 
-                                        <span class="badge rounded-pill bg-light">
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                        </span>
-                                    </div>
-                                    
-                                    <h6 class="mb-4">$1000</h6> 
-
-                                    <div class="d-flex justify-content-evenly mb-2"> 
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Add To Cart <i class="bi bi-cart-check"></i></a>
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Description</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 my-3"> 
-                            <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-                                <img src="images/mobile/1.jpg" class="card-img-top">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">iPhone</h5>
-                                    <div class="rating mb-3"> 
-                                        <span class="badge rounded-pill bg-light">
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                        </span>
-                                    </div>
-                                    
-                                    <h6 class="mb-4">$1000</h6> 
-
-                                    <div class="d-flex justify-content-evenly mb-2"> 
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Add To Cart <i class="bi bi-cart-check"></i></a>
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Description</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 my-3"> 
-                            <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-                                <img src="images/mobile/1.jpg" class="card-img-top">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">iPhone</h5>
-                                    <div class="rating mb-3"> 
-                                        <span class="badge rounded-pill bg-light">
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                        </span>
-                                    </div>
-                                    
-                                    <h6 class="mb-4">$1000</h6> 
-
-                                    <div class="d-flex justify-content-evenly mb-2"> 
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Add To Cart <i class="bi bi-cart-check"></i></a>
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Description</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 my-3"> 
-                            <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-                                <img src="images/mobile/1.jpg" class="card-img-top">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">iPhone</h5>
-                                    <div class="rating mb-3"> 
-                                        <span class="badge rounded-pill bg-light">
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                            <i class="bi bi-star-fill text-warning"></i>
-                                        </span>
-                                    </div>
-                                    
-                                    <h6 class="mb-4">$1000</h6> 
-
-                                    <div class="d-flex justify-content-evenly mb-2"> 
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Add To Cart <i class="bi bi-cart-check"></i></a>
-                                        <a href="#" class="btn btn-sm btn-primary shadow-none">Description</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            data;
+                        }
+                    ?>
                         
                     </div>  
                 </div>

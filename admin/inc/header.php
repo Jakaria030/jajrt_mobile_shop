@@ -36,7 +36,7 @@
                     <li class="nav-item"><a class="nav-link text-white" href="user_queries.php">User Queries</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="rate_review.php">Rating & Review</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="video_comment.php">Video & Comment</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="rooms.php">Mobile</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="mobile.php">Mobile</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="carousel.php">Carousel</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="settings.php">Settings</a></li>
                 </ul>

@@ -220,48 +220,6 @@
         xhr.send(data);
     });
 
-
-    //For comment section
-    let comment_form = document.getElementById("comment-form");
-    comment_form.addEventListener("submit", (e) =>{
-        e.preventDefault();
-
-        let data = new FormData();
-
-        data.append("v_id", comment_form.elements["v_id"].value);
-        data.append("u_id", comment_form.elements["u_id"].value);
-        data.append("comment", comment_form.elements["comment"].value);
-        data.append("add_comment", "");
-
-        
-        //For Ajax
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "ajax/login_register.php", true);
-        
-        xhr.onload = function(){
-            comment_form.reset();
-            get_comment();
-        }
-        xhr.send(data);
-    });
-
-    //For get comment
-    function get_comment(){
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "ajax/login_register.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        
-        xhr.onload = function(){
-            document.getElementById("comment-data").innerHTML = this.responseText;     
-        }
-
-        xhr.send("get_comment");
-    }
-
     setActive();
-
-    //For load windo and call get_user function
-    window.onload = function(){
-        get_comment();
-    }
+    
 </script>

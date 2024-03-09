@@ -58,7 +58,7 @@ function rem_image(val){
             customAlert("success", "Image removed!");
             get_carousel();
         }else{
-            customAlert("error", "Server connection failed!");
+            customAlert("error", "Server remove failed!");
         }
     }
 

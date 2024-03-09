@@ -11,7 +11,7 @@
     //Contact details
     $contact_q = crud("select", "SELECT * FROM `contact_details` WHERE `sr_no`=?", [1], "i");
     $contact_r = $contact_q->fetch_assoc();
-    
+
 ?>
 <!-- Bootstrap v5.0 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
