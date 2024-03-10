@@ -60,7 +60,7 @@
                                 while($row = $category_res->fetch_assoc()){
                                     echo<<<data
                                     <div class="mb-2"> 
-                                        <input type="checkbox"  value="$row[category]" id="$row[c_id]" class="form-check-input shadow-none me-1">
+                                        <input type="checkbox" value="$row[category]" id="$row[c_id]" class="form-check-input shadow-none me-1">
                                         <label class="form-check-label" for="$row[c_id]">$row[category]</label>
                                     </div>
                                     data;

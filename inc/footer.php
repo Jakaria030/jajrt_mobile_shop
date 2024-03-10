@@ -220,6 +220,17 @@
         xhr.send(data);
     });
 
+    function search_mobile(srcKey=""){
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "ajax/search_mobile.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        
+        xhr.onload = function(){
+            document.getElementById("mobile-s-data").innerHTML = this.responseText;     
+        }
+
+        xhr.send("search_mobile&searchKey="+srcKey);
+    }
     setActive();
     
 </script>

@@ -7,17 +7,20 @@
                 <a href="admin/index.php" class="text-decoration-none text-dark">Admin Login</a>
             </div>
             <div class="">
-                <input type="text" class="form-control shadow-none" placeholder="Type to search...">
+                <input style="width: 450px;" type="text" oninput="search_mobile(this.value)" class="form-control dropdown-toggle shadow-none" id="searchDropdown" data-bs-toggle="dropdown"  placeholder="Type to search...">
+                <ul style="z-index:99999; width:450px; max-height: 400px; overflow-y: scroll;" class="dropdown-menu dropdown-menu-end" id="mobile-s-data" aria-labelledby="searchDropdown">
+                    
+                </ul>
             </div>
             <div class="cart">
                 <div class="d-flex align-items-center">
                     <span class="fs-6">Total: $500</span>
                     <div class="dropdown">
-                        <a class="btn dropdown-toggle shadow-none .dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a href="#" class="btn dropdown-toggle shadow-none"  id="cartDropdown" data-bs-toggle="dropdown">
                             <i class="bi bi-cart-plus-fill fs-3"></i>
                         </a>
 
-                        <ul style="z-index:99999;" class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="dropdownMenuLink">
+                        <ul style="z-index:99999;" class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="cartDropdown">
                             <li><a class="dropdown-item" href="#">Action</a></li>
                             <li><a class="dropdown-item" href="#">Another action</a></li>
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
